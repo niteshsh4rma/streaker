@@ -9,12 +9,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.2
+  flutter_gen: ^5.4.0
+  build_runner: ^2.4.9
+  flutter_gen_runner: ^5.4.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+
+flutter_launcher_icons:
+  android: ic_launcher
+  image_path: assets/images/logo.png
+
+flutter_native_splash:
+  color: "#6A3DE8" # primary color
+  image: assets/images/logo.png
+
+flutter_gen:
+  colors:
+    inputs:
+      - assets/color/colors.xml
