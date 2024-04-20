@@ -22,4 +22,7 @@ icons:
 splash:
 	fvm dart run flutter_native_splash:create
 
+lint:
+	fvm dart run custom_lint
+
 # Path: makefile

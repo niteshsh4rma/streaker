@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "936951452284",
+    "project_id": "streaker-flutter",
+    "storage_bucket": "streaker-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936951452284:android:42913ea2af0ad72409aff9",
+        "android_client_info": {
+          "package_name": "com.niteshsh4rma.streaker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7YNrjGyQnYhGyahJSbFQJ2qzJIbMdJSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
