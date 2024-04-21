@@ -2,8 +2,7 @@ part of 'router.dart';
 
 enum Routes {
   root('/'),
-  login('login'),
-  register('register'),
+  auth('auth'),
   dashboard('dashboard');
 
   final String path;
