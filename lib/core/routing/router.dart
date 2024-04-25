@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:streaker/features/auth/ui/auth_screen.dart';
 import 'package:streaker/features/dashboard/ui/dashboard_screen.dart';
+import 'package:streaker/features/onboarding/ui/onboarding_screen.dart';
 import 'package:streaker/features/splash/ui/splash_screen.dart';
 
 part 'routes.dart';
@@ -20,6 +21,14 @@ final GoRouter router = GoRouter(
         child: const SplashScreen(),
       ),
       routes: [
+        GoRoute(
+          path: Routes.onboarding.path,
+          name: Routes.onboarding.name,
+          pageBuilder: (context, state) => CustomPage(
+            key: state.pageKey,
+            child: const OnboardingScreen(),
+          ),
+        ),
         GoRoute(
           path: Routes.auth.path,
           name: Routes.auth.name,

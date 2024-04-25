@@ -18,21 +18,23 @@ class Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       tag: 'logoHeroAnimation',
-      child: Assets.images.logo
-          .image(width: size.width, height: size.height)
-          .animate(
-        effects: [
-          const RotateEffect(
-            duration: Duration(seconds: 5),
-            curve: Curves.linear,
-            alignment: Alignment.center,
-            begin: 0,
-            end: 1,
-          ),
-        ],
-        autoPlay: true,
-        onComplete: onComplete,
-        onPlay: (controller) => repeat ? controller.repeat() : null,
+      child: RepaintBoundary(
+        child: Assets.images.logo
+            .image(width: size.width, height: size.height)
+            .animate(
+          effects: [
+            const RotateEffect(
+              duration: Duration(seconds: 5),
+              curve: Curves.linear,
+              alignment: Alignment.center,
+              begin: 0,
+              end: 1,
+            ),
+          ],
+          autoPlay: true,
+          onComplete: onComplete,
+          onPlay: (controller) => repeat ? controller.repeat() : null,
+        ),
       ),
     );
   }

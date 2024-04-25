@@ -1,14 +1,16 @@
 import 'dart:math';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:streaker/core/routing/router.dart';
+import 'package:streaker/core/services/snackbar_service.dart';
 import 'package:streaker/features/splash/ui/logo.dart';
 import 'package:streaker/features/splash/view_models/splash_view_model.dart';
 import 'package:streaker/gen/colors.gen.dart';
 
+// ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -16,48 +18,84 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  double calculateDiagonal() {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  double calculateDiagonal(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     return sqrt(pow(height, 2) + pow(width, 2));
   }
 
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final diagonalScreenSize = calculateDiagonal();
+    final diagonalScreenSize = calculateDiagonal(context);
+
     return Stack(
       children: <Widget>[
         Positioned.fill(
           child: Center(
             child: UnconstrainedBox(
               clipBehavior: Clip.antiAlias,
-              child: Container(
-                height: diagonalScreenSize,
-                width: diagonalScreenSize,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ColorName.primary,
-                ),
-              ).animate().scale(
-                    duration: const Duration(seconds: 5),
-                    curve: Curves.easeInExpo,
-                  ),
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  final splashVm = ref.watch(splashViewModelProvider);
+                  final route = splashVm.when(
+                    data: (route) => route,
+                    error: (_, __) {
+                      SnackbarService.showMessage(
+                        context,
+                        title: 'Error',
+                        message: __.toString(),
+                        contentType: ContentType.failure,
+                      );
+                      return null;
+                    },
+                    loading: () => null,
+                  );
+                  if (route != null) {
+                    controller.forward();
+                  }
+                  return Container(
+                    height: diagonalScreenSize,
+                    width: diagonalScreenSize,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorName.primary,
+                    ),
+                  )
+                      .animate(
+                        controller: controller,
+                        onPlay: (controller) => controller.stop(),
+                        onComplete: (_) => route != null
+                            ? context.pushReplacementNamed(route.name)
+                            : null,
+                      )
+                      .scale(
+                        duration: const Duration(seconds: 5),
+                        curve: Curves.linear,
+                      );
+                },
+              ),
             ),
           ),
         ),
-        Center(
-          child: Consumer(
-            builder: (context, ref, _) {
-              final user = ref.watch(splashViewModelProvider);
-              return Logo(
-                size: const Size.square(150),
-                repeat: false,
-                onComplete: (_) => user != null
-                    ? context.pushReplacementNamed(Routes.dashboard.name)
-                    : context.pushReplacementNamed(Routes.auth.name),
-              );
-            },
+        const Center(
+          child: Logo(
+            size: Size.square(150),
           ),
         ),
       ],

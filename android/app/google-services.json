@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "936951452284-t79bqkm64tfuqfsi0339godnvvg0b3i3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.niteshsh4rma.streaker",
+            "certificate_hash": "fae61589ce8bdeff9356cc586f7062a2c31fcbc8"
+          }
+        },
+        {
           "client_id": "936951452284-t0vq844msdmmh9r1t74stch5hq15gfvb.apps.googleusercontent.com",
           "client_type": 3
         }
