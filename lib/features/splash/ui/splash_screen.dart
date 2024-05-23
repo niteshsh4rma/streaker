@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:developer' as logger;
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import 'package:streaker/features/splash/ui/logo.dart';
 import 'package:streaker/features/splash/view_models/splash_view_model.dart';
 import 'package:streaker/gen/colors.gen.dart';
 
-// ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -44,61 +44,70 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     final diagonalScreenSize = calculateDiagonal(context);
 
-    return Stack(
-      children: <Widget>[
-        Positioned.fill(
-          child: Center(
-            child: UnconstrainedBox(
-              clipBehavior: Clip.antiAlias,
-              child: Consumer(
-                builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                  final splashVm = ref.watch(splashViewModelProvider);
-                  final route = splashVm.when(
-                    data: (route) => route,
-                    error: (_, __) {
-                      SnackbarService.showMessage(
-                        context,
-                        title: 'Error',
-                        message: __.toString(),
-                        contentType: ContentType.failure,
-                      );
-                      return null;
-                    },
-                    loading: () => null,
-                  );
-                  if (route != null) {
-                    controller.forward();
-                  }
-                  return Container(
-                    height: diagonalScreenSize,
-                    width: diagonalScreenSize,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorName.primary,
-                    ),
-                  )
-                      .animate(
-                        controller: controller,
-                        onPlay: (controller) => controller.stop(),
-                        onComplete: (_) => route != null
-                            ? context.pushReplacementNamed(route.name)
-                            : null,
-                      )
-                      .scale(
-                        duration: const Duration(seconds: 5),
-                        curve: Curves.linear,
-                      );
-                },
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Center(
+              child: UnconstrainedBox(
+                clipBehavior: Clip.antiAlias,
+                child: Consumer(
+                  builder: (
+                    BuildContext context,
+                    WidgetRef ref,
+                    Widget? child,
+                  ) {
+                    final splashVm = ref.watch(splashViewModelProvider);
+                    final route = splashVm.when(
+                      data: (route) => route,
+                      error: (_, __) {
+                        logger.log(__.toString());
+                        Future.delayed(
+                          Duration.zero,
+                          () => SnackbarService.showMessage(
+                            context,
+                            title: 'Error',
+                            message: 'An error occurred while signing in',
+                            contentType: ContentType.failure,
+                          ),
+                        );
+                        return null;
+                      },
+                      loading: () => null,
+                    );
+                    if (route != null) {
+                      controller.forward();
+                    }
+                    return Container(
+                      height: diagonalScreenSize,
+                      width: diagonalScreenSize,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorName.primary,
+                      ),
+                    )
+                        .animate(
+                          controller: controller,
+                          onComplete: (_) => route != null
+                              ? context.pushReplacementNamed(route.name)
+                              : null,
+                        )
+                        .scale(
+                          duration: const Duration(seconds: 5),
+                          curve: Curves.easeInOutBack,
+                        );
+                  },
+                ),
               ),
             ),
           ),
-        ),
-        const Center(
-          child: Logo(
-            size: Size.square(150),
+          const Center(
+            child: Logo(
+              size: Size.square(150),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

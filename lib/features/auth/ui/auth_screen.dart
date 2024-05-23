@@ -15,74 +15,68 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Builder(
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Spacer(),
+            const Logo(size: Size.square(100)),
+            const Gap(16),
+            Text(
+              'Let\'s get started!',
+              style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Spacer(),
-                const Logo(size: Size.square(100)),
-                const Gap(16),
-                Text(
-                  'Let\'s get started!',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center,
-                ),
-                const Gap(16),
-                Text(
-                  'Let\'s dive in into your account',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-                const Gap(20),
-                GoogleAuthButton(
-                  onPressed: () async {
-                    try {
-          
-                    await AuthService.signInWithGoogle();
+            const Gap(16),
+            Text(
+              'Let\'s dive in into your account',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.grey,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+            const Gap(20),
+            GoogleAuthButton(
+              onPressed: () async {
+                try {
+                  await AuthService.signInWithGoogle();
+                  // ignore: use_build_context_synchronously
+                  context.pushReplacementNamed(Routes.root.name);
+                } catch (error) {
+                  SnackbarService.showMessage(
                     // ignore: use_build_context_synchronously
-                    context.pushReplacementNamed(Routes.root.name);
-                    } catch (error) {
-                      print(error);
-                      SnackbarService.showMessage(
-                        // ignore: use_build_context_synchronously
-                        context,
-                        title: 'Error',
-                        message: 'An error occurred while signing in',
-                        contentType: ContentType.failure,
-                      );
-                    }
-                  },
+                    context,
+                    title: 'Error',
+                    message: 'An error occurred while signing in',
+                    contentType: ContentType.failure,
+                  );
+                }
+              },
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // TODO: Add Privacy Policy and Terms of Service
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Privacy Policy'),
                 ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // TODO: Add Privacy Policy and Terms of Service
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Privacy Policy'),
-                    ),
-                    const Gap(8),
-                    const Text('|'),
-                    const Gap(8),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Terms of Service'),
-                    ),
-                  ],
+                const Gap(8),
+                const Text('|'),
+                const Gap(8),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Terms of Service'),
                 ),
-                const Gap(16),
               ],
             ),
-          );
-        }
+            const Gap(16),
+          ],
+        ),
       ),
     );
   }

@@ -11,7 +11,6 @@ class SplashViewModel extends _$SplashViewModel {
   FutureOr<Routes> build() async => _getRoute();
 
   Future<Routes> _getRoute() async {
-    await Future.delayed(const Duration(seconds: 2));
     return AuthService.user != null
         ? await DbService.isOnboarded()
             ? Routes.dashboard

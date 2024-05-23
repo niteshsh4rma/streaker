@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:streaker/core/services/db_service.dart';
 
@@ -18,7 +20,7 @@ class AuthService {
         return DbService.createUser();
       }
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       return null;
     }
   }
@@ -26,9 +28,9 @@ class AuthService {
   // sign out
   static Future<void> signOut() async {
     try {
-      return await _auth.signOut();
+      return _auth.signOut();
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     }
   }
 }
