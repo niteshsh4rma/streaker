@@ -25,7 +25,7 @@ class Logo extends StatelessWidget {
           effects: [
             const RotateEffect(
               duration: Duration(seconds: 3),
-              curve: Curves.easeOut,
+              curve: Curves.easeInOut,
               alignment: Alignment.center,
               begin: 0,
               end: 1,

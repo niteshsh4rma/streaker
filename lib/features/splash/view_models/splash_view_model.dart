@@ -13,7 +13,7 @@ class SplashViewModel extends _$SplashViewModel {
   Future<Routes> _getRoute() async {
     return AuthService.user != null
         ? await DbService.isOnboarded()
-            ? Routes.dashboard
+            ? Routes.home
             : Routes.onboarding
         : Routes.auth;
   }

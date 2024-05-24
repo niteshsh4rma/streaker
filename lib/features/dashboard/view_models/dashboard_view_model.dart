@@ -1,19 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final dashboardViewModelProvider =
-    ChangeNotifierProvider((ref) => DashboardViewModel());
+part 'dashboard_view_model.g.dart';
 
-class DashboardViewModel extends ChangeNotifier {
-  // Add your properties and methods here
-
-  // Example property
-  int _counter = 0;
-  int get counter => _counter;
-
-  // Example method
-  void incrementCounter() {
-    _counter++;
-    notifyListeners();
+@riverpod
+class DashboardViewModel extends _$DashboardViewModel {
+  @override
+  DashboardState build() {
+    return DashboardState();
   }
+
+  void setTabIndex(int index) {
+    state = DashboardState(tabIndex: index);
+  }
+}
+
+class DashboardState {
+  final int tabIndex;
+
+  DashboardState({this.tabIndex = 0});
 }

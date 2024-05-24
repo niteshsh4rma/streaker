@@ -60,8 +60,8 @@ class OnboardingViewModel extends _$OnboardingViewModel {
     } else {
       setLoading(true);
       return DbService.completeOnboarding(state).then((_) => true).catchError(
-        (_) {
-          log(_.toString());
+        (stackTrace) {
+          log(stackTrace.toString());
           setLoading(false);
           return false;
         },

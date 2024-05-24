@@ -60,8 +60,8 @@ class _SplashScreenState extends State<SplashScreen>
                     final splashVm = ref.watch(splashViewModelProvider);
                     final route = splashVm.when(
                       data: (route) => route,
-                      error: (_, __) {
-                        logger.log(__.toString());
+                      error: (_, stackTrace) {
+                        logger.log(stackTrace.toString());
                         Future.delayed(
                           Duration.zero,
                           () => SnackbarService.showMessage(

@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash_view_model.dart';
+part of 'dashboard_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$splashViewModelHash() => r'81c7b291dab44c37ec5746f2a1cd8686789d3023';
+String _$dashboardViewModelHash() =>
+    r'b2b9c855a374b03d41314677ee3b7ce8a5050b2d';
 
-/// See also [SplashViewModel].
-@ProviderFor(SplashViewModel)
-final splashViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<SplashViewModel, Routes>.internal(
-  SplashViewModel.new,
-  name: r'splashViewModelProvider',
+/// See also [DashboardViewModel].
+@ProviderFor(DashboardViewModel)
+final dashboardViewModelProvider =
+    AutoDisposeNotifierProvider<DashboardViewModel, DashboardState>.internal(
+  DashboardViewModel.new,
+  name: r'dashboardViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$splashViewModelHash,
+      : _$dashboardViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SplashViewModel = AutoDisposeAsyncNotifier<Routes>;
+typedef _$DashboardViewModel = AutoDisposeNotifier<DashboardState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

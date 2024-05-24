@@ -4,7 +4,11 @@ enum Routes {
   root('/'),
   auth('auth'),
   onboarding('onboarding'),
-  dashboard('dashboard');
+  home('home'),
+  moodStat('moodStat'),
+  report('report'),
+  myHabits('myHabits'),
+  account('account');
 
   final String path;
 
