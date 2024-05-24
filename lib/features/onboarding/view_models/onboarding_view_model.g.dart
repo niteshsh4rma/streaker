@@ -87,7 +87,7 @@ const _$GoalEnumMap = {
 // **************************************************************************
 
 String _$onboardingViewModelHash() =>
-    r'ac3888465b09078fda1a554e65e04e8aceb766a3';
+    r'c6bc15c0ee8c9798fe0349c2f76fa5a96306370d';
 
 /// See also [OnboardingViewModel].
 @ProviderFor(OnboardingViewModel)
