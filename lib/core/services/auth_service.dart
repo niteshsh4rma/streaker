@@ -7,11 +7,12 @@ class AuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static User? get user => _auth.currentUser;
-  
+
   // sign in with google
   static Future<User?> signInWithGoogle() async {
     try {
-      UserCredential result = await _auth.signInWithProvider(GoogleAuthProvider());
+      UserCredential result =
+          await _auth.signInWithProvider(GoogleAuthProvider());
       User? user = result.user;
       bool isUserAlreadyExists = await DbService.isUserAlreadyExists();
       if (isUserAlreadyExists) {
