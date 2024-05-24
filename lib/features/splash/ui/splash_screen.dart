@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen>
                               : null,
                         )
                         .scale(
-                          duration: const Duration(seconds: 5),
+                          duration: const Duration(seconds: 3),
                           curve: Curves.easeInOutBack,
                         );
                   },

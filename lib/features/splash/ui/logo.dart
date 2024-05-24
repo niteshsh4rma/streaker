@@ -24,8 +24,8 @@ class Logo extends StatelessWidget {
             .animate(
           effects: [
             const RotateEffect(
-              duration: Duration(seconds: 5),
-              curve: Curves.linear,
+              duration: Duration(seconds: 3),
+              curve: Curves.easeOut,
               alignment: Alignment.center,
               begin: 0,
               end: 1,

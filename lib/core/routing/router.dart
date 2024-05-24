@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:streaker/features/auth/ui/auth_screen.dart';
 import 'package:streaker/features/dashboard/ui/dashboard_screen.dart';
@@ -16,7 +17,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.root.path,
       name: Routes.root.name,
-      pageBuilder: (context, state) => CustomPage(
+      pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
         child: const SplashScreen(),
       ),

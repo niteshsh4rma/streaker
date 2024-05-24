@@ -15,6 +15,7 @@ class DashboardScreen extends ConsumerWidget {
         centerTitle: false,
         title: const Logo(
           size: Size.square(35),
+          repeat: false,
         ),
       ),
       body: Center(

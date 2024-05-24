@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:signature/signature.dart';
@@ -8,6 +9,7 @@ class OnboardingConsentView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final onboardingVM = ref.read(onboardingViewModelProvider.notifier);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -62,11 +64,26 @@ class OnboardingConsentView extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Theme.of(context).dividerColor),
               ),
-              child: Signature(
-                controller: ref
-                    .read(onboardingViewModelProvider.notifier)
-                    .signatureController,
-                backgroundColor: Theme.of(context).colorScheme.surface,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Signature(
+                      controller: onboardingVM.signatureController,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: FloatingActionButton.small(
+                      onPressed: () {
+                        onboardingVM.signatureController.clear();
+                        onboardingVM.setContractSigned(false);
+                      },
+                      child: const Icon(Icons.clear),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
