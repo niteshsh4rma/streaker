@@ -19,14 +19,33 @@ class DashboardScreen extends ConsumerWidget {
     final dashboardState = ref.watch(dashboardViewModelProvider);
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: const Logo(
-          size: Size.square(35),
-          repeat: false,
+        centerTitle: true,
+        leadingWidth: 55,
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 16),
+          child: Logo(
+            size: Size.square(40),
+            repeat: false,
+          ),
         ),
+        title: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          child: Text(
+            dashboardState.title,
+            key: ValueKey<String>(dashboardState.title),
+          ),
+        ),
+        actions: dashboardState.actions,
       ),
       body: child,
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         animationDuration: const Duration(milliseconds: 500),
         selectedIndex: dashboardState.tabIndex,
         height: 64,

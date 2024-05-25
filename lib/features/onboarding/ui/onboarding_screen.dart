@@ -59,6 +59,7 @@ class OnboardingScreen extends ConsumerWidget {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
           border: Border(
             top: BorderSide(
               color: Theme.of(context).dividerColor,

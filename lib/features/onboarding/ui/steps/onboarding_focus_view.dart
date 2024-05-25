@@ -48,6 +48,7 @@ class OnboardingFocusView extends ConsumerWidget {
           ),
           ListView.separated(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => OptionTile.single(
               isSelected: ref.watch(onboardingViewModelProvider).focusIssue ==
                   FocusIssue.values[index],

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +10,15 @@ import 'package:streaker/core/services/auth_service.dart';
 import 'package:streaker/core/services/snackbar_service.dart';
 import 'package:streaker/features/splash/ui/logo.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +49,21 @@ class AuthScreen extends StatelessWidget {
             ),
             const Gap(20),
             GoogleAuthButton(
+              isLoading: isLoading,
               onPressed: () async {
+                setState(() => isLoading = true);
                 try {
                   await AuthService.signInWithGoogle();
-                  // ignore: use_build_context_synchronously
                   context.pushReplacementNamed(Routes.root.name);
                 } catch (error) {
                   SnackbarService.showMessage(
-                    // ignore: use_build_context_synchronously
                     context,
                     title: 'Error',
                     message: 'An error occurred while signing in',
                     contentType: ContentType.failure,
                   );
                 }
+                setState(() => isLoading = false);
               },
             ),
             const Spacer(),

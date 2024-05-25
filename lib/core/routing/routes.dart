@@ -8,7 +8,8 @@ enum Routes {
   moodStat('moodStat'),
   report('report'),
   myHabits('myHabits'),
-  account('account');
+  account('account'),
+  preferences('preferences');
 
   final String path;
 

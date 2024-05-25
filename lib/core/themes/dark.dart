@@ -10,6 +10,9 @@ final ThemeData darkTheme = ThemeData(
     seedColor: ColorName.primary,
     brightness: Brightness.dark,
   ),
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+  ),
   useMaterial3: true,
   brightness: Brightness.dark,
   pageTransitionsTheme: const PageTransitionsTheme(

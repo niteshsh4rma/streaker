@@ -6,6 +6,11 @@ final ThemeData lightTheme = ThemeData(
   progressIndicatorTheme: const ProgressIndicatorThemeData(
     linearMinHeight: 8,
   ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: ColorName.background,
+    centerTitle: true,
+  ),
+  scaffoldBackgroundColor: ColorName.background,
   colorScheme: ColorScheme.fromSeed(seedColor: ColorName.primary),
   useMaterial3: true,
   brightness: Brightness.light,

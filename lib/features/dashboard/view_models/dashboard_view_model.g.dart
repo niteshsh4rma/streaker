@@ -7,7 +7,7 @@ part of 'dashboard_view_model.dart';
 // **************************************************************************
 
 String _$dashboardViewModelHash() =>
-    r'f28eaa1036aad2bad32ac1f60db63db59bb733f9';
+    r'b86be0561075bbe44eefc2df476d329e316c429b';
 
 /// See also [DashboardViewModel].
 @ProviderFor(DashboardViewModel)

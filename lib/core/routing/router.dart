@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:streaker/features/account/preferences/ui/preferences_screen.dart';
 import 'package:streaker/features/account/ui/account_screen.dart';
 import 'package:streaker/features/auth/ui/auth_screen.dart';
 import 'package:streaker/features/dashboard/models/tabs.dart';
@@ -106,6 +107,19 @@ final GoRouter router = GoRouter(
                   child: const AccountScreen(),
                 );
               },
+              routes: [
+                GoRoute(
+                  path: Routes.preferences.path,
+                  name: Routes.preferences.name,
+                  parentNavigatorKey: navigatorKey,
+                  pageBuilder: (context, state) {
+                    return CustomPage(
+                      key: state.pageKey,
+                      child: const PreferencesScreen(),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

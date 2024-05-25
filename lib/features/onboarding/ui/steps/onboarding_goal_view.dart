@@ -48,6 +48,7 @@ class OnboardingGoalView extends ConsumerWidget {
           ),
           ListView.separated(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => OptionTile.multiple(
               isSelected: ref
                   .watch(onboardingViewModelProvider)
