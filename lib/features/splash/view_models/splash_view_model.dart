@@ -10,10 +10,8 @@ class SplashViewModel extends _$SplashViewModel {
   @override
   FutureOr<Routes> build() async {
     final route = await _getRoute();
-    if (route == Routes.home) {
-    }
+    if (route == Routes.home) {}
     return route;
-
   }
 
   Future<Routes> _getRoute() async {

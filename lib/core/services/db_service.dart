@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:streaker/core/services/auth_service.dart';
 import 'package:streaker/features/account/preferences/view_models/preferences_view_model.dart';
 import 'package:streaker/features/onboarding/view_models/onboarding_view_model.dart';
@@ -26,7 +27,10 @@ class DbService {
     return _db.doc(AuthService.user!.uid).update({
       'isOnboarded': true,
       'onboarding': state.toJson(),
-      'preferences': PreferencesState().toJson(),
+      'preferences': PreferencesState(
+        morning: TimeOfDay.fromDateTime(state.wakeUpTime!),
+        evening: TimeOfDay.fromDateTime(state.bedTime!),
+      ).toJson(),
     });
   }
 
