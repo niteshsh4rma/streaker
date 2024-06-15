@@ -13,6 +13,11 @@ final ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     centerTitle: true,
   ),
+  iconButtonTheme: IconButtonThemeData(
+    style: IconButton.styleFrom(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+  ),
   useMaterial3: true,
   brightness: Brightness.dark,
   pageTransitionsTheme: const PageTransitionsTheme(

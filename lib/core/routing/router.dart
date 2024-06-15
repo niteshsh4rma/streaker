@@ -7,6 +7,7 @@ import 'package:streaker/features/auth/ui/auth_screen.dart';
 import 'package:streaker/features/dashboard/models/tabs.dart';
 import 'package:streaker/features/dashboard/ui/dashboard_screen.dart';
 import 'package:streaker/features/dashboard/view_models/dashboard_view_model.dart';
+import 'package:streaker/features/habit/ui/add_habit_screen.dart';
 import 'package:streaker/features/home/ui/home_screen.dart';
 import 'package:streaker/features/mood_stat/ui/mood_stat_screen.dart';
 import 'package:streaker/features/my_habits/ui/my_habits_screen.dart';
@@ -123,6 +124,17 @@ final GoRouter router = GoRouter(
             ),
           ],
         ),
+        GoRoute(
+          path: Routes.addHabit.path,
+          name: Routes.addHabit.name,
+          parentNavigatorKey: navigatorKey,
+          pageBuilder: (context, state) {
+            return CustomPage(
+              key: state.pageKey,
+              child: const AddHabitScreen(),
+            );
+          },
+        ),
       ],
     ),
   ],
@@ -187,7 +199,7 @@ class _CustomRouteBuilder<T> extends PageRouteBuilder<T> {
               child: child,
             );
           },
-          transitionDuration: const Duration(milliseconds: 400),
-          reverseTransitionDuration: const Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 250),
+          reverseTransitionDuration: const Duration(milliseconds: 250),
         );
 }

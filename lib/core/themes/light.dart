@@ -14,6 +14,11 @@ final ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: ColorName.primary),
   useMaterial3: true,
   brightness: Brightness.light,
+  iconButtonTheme: IconButtonThemeData(
+    style: IconButton.styleFrom(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+  ),
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
       TargetPlatform.android: CupertinoPageTransitionsBuilder(),

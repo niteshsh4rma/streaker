@@ -9,7 +9,8 @@ enum Routes {
   report('report'),
   myHabits('myHabits'),
   account('account'),
-  preferences('preferences');
+  preferences('preferences'),
+  addHabit('addHabit');
 
   final String path;
 

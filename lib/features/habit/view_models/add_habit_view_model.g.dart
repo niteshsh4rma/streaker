@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'splash_view_model.dart';
+part of 'add_habit_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$splashViewModelHash() => r'88a2055cfbef8b0e0092c5184387d999dd2735b3';
+String _$addHabitViewModelHash() => r'436b2d9bf5f9a93ec6c38b95a3052db00d869222';
 
-/// See also [SplashViewModel].
-@ProviderFor(SplashViewModel)
-final splashViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<SplashViewModel, Routes>.internal(
-  SplashViewModel.new,
-  name: r'splashViewModelProvider',
+/// See also [AddHabitViewModel].
+@ProviderFor(AddHabitViewModel)
+final addHabitViewModelProvider =
+    AutoDisposeNotifierProvider<AddHabitViewModel, Habit>.internal(
+  AddHabitViewModel.new,
+  name: r'addHabitViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$splashViewModelHash,
+      : _$addHabitViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SplashViewModel = AutoDisposeAsyncNotifier<Routes>;
+typedef _$AddHabitViewModel = AutoDisposeNotifier<Habit>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

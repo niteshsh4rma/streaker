@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:streaker/core/utils.dart';
 
 part 'preferences_view_model.g.dart';
 part 'preferences_view_model.freezed.dart';
@@ -67,13 +68,4 @@ class PreferencesState with _$PreferencesState {
 
   factory PreferencesState.fromJson(Map<String, Object?> json) =>
       _$PreferencesStateFromJson(json);
-}
-
-TimeOfDay timeOfDayfromJson(String timeOfDay) {
-  final parts = timeOfDay.split(':');
-  return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
-}
-
-String timeOfDaytoJson(TimeOfDay timeOfDay) {
-  return '${timeOfDay.hour}:${timeOfDay.minute}';
 }

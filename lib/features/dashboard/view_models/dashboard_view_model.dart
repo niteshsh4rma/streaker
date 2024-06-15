@@ -28,25 +28,25 @@ class DashboardViewModel extends _$DashboardViewModel {
   final Map<String, List<Widget>> actionsMap = {
     NavigationTab.home.label: [
       IconButton(
-        icon: const Icon(Icons.menu),
+        icon: const Icon(Icons.more_vert),
         onPressed: () {},
       ),
     ],
     NavigationTab.moodStat.label: [
       IconButton(
-        icon: const Icon(Icons.menu),
+        icon: const Icon(Icons.more_vert),
         onPressed: () {},
       ),
     ],
     NavigationTab.report.label: [
       IconButton(
-        icon: const Icon(Icons.menu),
+        icon: const Icon(Icons.more_vert),
         onPressed: () {},
       ),
     ],
     NavigationTab.myHabits.label: [
       IconButton(
-        icon: const Icon(Icons.menu),
+        icon: const Icon(Icons.more_vert),
         onPressed: () {},
       ),
     ],
