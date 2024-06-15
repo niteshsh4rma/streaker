@@ -451,9 +451,29 @@ class _When extends ConsumerWidget {
   }
 }
 
-class _IconSelection extends ConsumerWidget {
+class _IconSelection extends ConsumerStatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_IconSelection> createState() => _IconSelectionState();
+}
+
+class _IconSelectionState extends ConsumerState<_IconSelection> {
+  late final ScrollController scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final habit = ref.watch(addHabitViewModelProvider);
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
@@ -472,23 +492,29 @@ class _IconSelection extends ConsumerWidget {
         SizedBox(
           width: double.infinity,
           height: 150,
-          child: SingleChildScrollView(
-            child: Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: AnimatedEmojis.values
-                  .map(
-                    (e) => ChoiceChip(
-                      label: AnimatedEmoji(
-                        e,
-                        size: 30,
-                      ),
-                      selected: habit.emoji == e,
-                      onSelected: (_) => vm.setEmoji(e),
-                      showCheckmark: false,
-                    ),
-                  )
-                  .toList(),
+          child: Scrollbar(
+            controller: scrollController,
+            thumbVisibility: true,
+            child: GridView.builder(
+              controller: scrollController,
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+              ),
+              itemBuilder: (context, index) {
+                final emoji = AnimatedEmojis.values[index];
+
+                return ChoiceChip(
+                  label: AnimatedEmoji(
+                    emoji,
+                    size: 30,
+                  ),
+                  selected: habit.emoji == emoji,
+                  onSelected: (_) => vm.setEmoji(emoji),
+                  showCheckmark: false,
+                );
+              },
+              itemCount: AnimatedEmojis.values.length,
             ),
           ),
         ),
