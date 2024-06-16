@@ -6,6 +6,8 @@ class ReportScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Text('report screen');
+    return const Scaffold(
+      body: Text('report screen'),
+    );
   }
 }

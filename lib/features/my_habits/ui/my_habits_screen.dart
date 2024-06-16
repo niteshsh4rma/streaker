@@ -6,6 +6,8 @@ class MyHabitsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Text('my habits screen');
+    return const Scaffold(
+      body: Text('my habits screen'),
+    );
   }
 }

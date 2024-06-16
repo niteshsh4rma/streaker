@@ -15,6 +15,10 @@ class PreferencesViewModel extends _$PreferencesViewModel {
     return PreferencesState();
   }
 
+  void set(PreferencesState state) {
+    this.state = state;
+  }
+
   bool setMorningTime(TimeOfDay morning) {
     if (toDouble(morning) >= toDouble(state.afternoon)) return false;
     state = state.copyWith(

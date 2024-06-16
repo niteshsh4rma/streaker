@@ -18,6 +18,9 @@ final ThemeData darkTheme = ThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
   ),
+  chipTheme: const ChipThemeData(
+    showCheckmark: false,
+  ),
   useMaterial3: true,
   brightness: Brightness.dark,
   pageTransitionsTheme: const PageTransitionsTheme(

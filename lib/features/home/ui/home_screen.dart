@@ -11,17 +11,39 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allHabits = ref.watch(allHabitsViewModelProvider);
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: allHabits.entries
-              .map((e) => Text('${e.key} ${e.value}'))
-              .toList(),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body: Column(
+          children: [
+            TabBar(
+              tabs: [
+                Tab(
+                  text: 'Today',
+                ),
+                Tab(
+                  text: 'Weekly',
+                ),
+                Tab(
+                  text: 'Overall',
+                ),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  Text('All'),
+                  Text('Weekly'),
+                  Text('Overall'),
+                ],
+              ),
+            ),
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.pushNamed(Routes.addHabit.name),
-        child: const Icon(Iconsax.add),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => context.pushNamed(Routes.addHabit.name),
+          child: const Icon(Iconsax.add),
+        ),
       ),
     );
   }

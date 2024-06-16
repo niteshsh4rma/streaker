@@ -10,6 +10,9 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: ColorName.background,
     centerTitle: true,
   ),
+  chipTheme: const ChipThemeData(
+    showCheckmark: false,
+  ),
   scaffoldBackgroundColor: ColorName.background,
   colorScheme: ColorScheme.fromSeed(seedColor: ColorName.primary),
   useMaterial3: true,

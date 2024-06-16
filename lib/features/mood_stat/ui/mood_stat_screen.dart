@@ -6,6 +6,6 @@ class MoodStateScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Text('mood state screen');
+    return Scaffold(body: Text('mood state screen'));
   }
 }

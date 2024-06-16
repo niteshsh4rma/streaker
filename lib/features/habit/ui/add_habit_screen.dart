@@ -144,7 +144,6 @@ class _Daily extends ConsumerWidget {
                     onSelected: (day) => vm.toggleDailyFrequency(e),
                     label: Text(e.name[0].toUpperCase()),
                     selected: dailyFrequency.contains(e),
-                    showCheckmark: false,
                   ),
                 )
                 .toList(),
@@ -182,7 +181,6 @@ class _Weekly extends ConsumerWidget {
                     onSelected: (day) => vm.setWeeklyFrequency(e),
                     label: Text(e.toString()),
                     selected: weeklyFrequency == e,
-                    showCheckmark: false,
                   ),
                 )
                 .toList(),
@@ -304,7 +302,6 @@ class _DoItAtSelect extends ConsumerWidget {
                     onSelected: (_) => vm.setTime(e),
                     label: Text(e.name.capitalize),
                     selected: time == e,
-                    showCheckmark: false,
                   ),
                 )
                 .toList(),
@@ -344,7 +341,6 @@ class _RepeatSelect extends ConsumerWidget {
                   (e) => ChoiceChip(
                     label: Text(e.name.capitalize),
                     selected: frequency == e,
-                    showCheckmark: false,
                     onSelected: (value) => vm.setFrequency(e),
                   ),
                 )
@@ -528,7 +524,6 @@ class _IconSelectionState extends ConsumerState<_IconSelection> {
                   ),
                   selected: emoji == e,
                   onSelected: (_) => vm.setEmoji(e),
-                  showCheckmark: false,
                 );
               },
               itemCount: AnimatedEmojis.values.length,
