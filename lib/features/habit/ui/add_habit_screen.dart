@@ -120,7 +120,9 @@ class AddHabitScreen extends ConsumerWidget {
 class _Daily extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final dailyFrequency = ref.watch(
+      addHabitViewModelProvider.select((value) => value.dailyFrequency),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -141,7 +143,7 @@ class _Daily extends ConsumerWidget {
                   (e) => ChoiceChip(
                     onSelected: (day) => vm.toggleDailyFrequency(e),
                     label: Text(e.name[0].toUpperCase()),
-                    selected: habit.dailyFrequency.contains(e),
+                    selected: dailyFrequency.contains(e),
                     showCheckmark: false,
                   ),
                 )
@@ -156,7 +158,9 @@ class _Daily extends ConsumerWidget {
 class _Weekly extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final weeklyFrequency = ref.watch(
+      addHabitViewModelProvider.select((value) => value.weeklyFrequency),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -177,7 +181,7 @@ class _Weekly extends ConsumerWidget {
                   (e) => ChoiceChip(
                     onSelected: (day) => vm.setWeeklyFrequency(e),
                     label: Text(e.toString()),
-                    selected: habit.weeklyFrequency == e,
+                    selected: weeklyFrequency == e,
                     showCheckmark: false,
                   ),
                 )
@@ -193,7 +197,9 @@ class _Monthly extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final today = DateTime.now();
-    final habit = ref.watch(addHabitViewModelProvider);
+    final monthlyFrequency = ref.watch(
+      addHabitViewModelProvider.select((value) => value.monthlyFrequency),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Card(
@@ -202,7 +208,7 @@ class _Monthly extends ConsumerWidget {
         child: TableCalendar(
           firstDay: DateTime(today.year, today.month, 1),
           lastDay: DateTime(today.year, today.month + 1, 0),
-          selectedDayPredicate: (day) => habit.monthlyFrequency.contains(
+          selectedDayPredicate: (day) => monthlyFrequency.contains(
             day.day,
           ),
           onDaySelected: (day, _) => vm.toggleMonthlyFrequency(day.day),
@@ -217,7 +223,9 @@ class _Monthly extends ConsumerWidget {
 class _Reminder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final reminderTime = ref.watch(
+      addHabitViewModelProvider.select((value) => value.reminderTime),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -232,17 +240,17 @@ class _Reminder extends ConsumerWidget {
             ),
             const Spacer(),
             Switch(
-              value: habit.reminderTime != null,
+              value: reminderTime != null,
               onChanged: (value) =>
                   vm.setReminder(value ? TimeOfDay.now() : null),
             ),
           ],
         ),
-        if (habit.reminderTime != null)
+        if (reminderTime != null)
           TextField(
             readOnly: true,
             controller: TextEditingController(
-              text: habit.reminderTime?.format(context),
+              text: reminderTime.format(context),
             ),
             onTap: () async {
               final time = await showTimePicker(
@@ -269,7 +277,9 @@ class _Reminder extends ConsumerWidget {
 class _DoItAtSelect extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final time = ref.watch(
+      addHabitViewModelProvider.select((value) => value.time),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -293,7 +303,7 @@ class _DoItAtSelect extends ConsumerWidget {
                   (e) => ChoiceChip(
                     onSelected: (_) => vm.setTime(e),
                     label: Text(e.name.capitalize),
-                    selected: habit.time == e,
+                    selected: time == e,
                     showCheckmark: false,
                   ),
                 )
@@ -308,7 +318,9 @@ class _DoItAtSelect extends ConsumerWidget {
 class _RepeatSelect extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final frequency = ref.watch(
+      addHabitViewModelProvider.select((value) => value.frequency),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -331,7 +343,7 @@ class _RepeatSelect extends ConsumerWidget {
                 .map(
                   (e) => ChoiceChip(
                     label: Text(e.name.capitalize),
-                    selected: habit.frequency == e,
+                    selected: frequency == e,
                     showCheckmark: false,
                     onSelected: (value) => vm.setFrequency(e),
                   ),
@@ -339,11 +351,11 @@ class _RepeatSelect extends ConsumerWidget {
                 .toList(),
           ),
         ),
-        if (habit.frequency == Frequency.daily)
+        if (frequency == Frequency.daily)
           _Daily()
-        else if (habit.frequency == Frequency.weekly)
+        else if (frequency == Frequency.weekly)
           _Weekly()
-        else if (habit.frequency == Frequency.monthly)
+        else if (frequency == Frequency.monthly)
           _Monthly(),
       ],
     );
@@ -353,7 +365,9 @@ class _RepeatSelect extends ConsumerWidget {
 class _EndsOn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final endsOn = ref.watch(
+      addHabitViewModelProvider.select((value) => value.endsOn),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -368,16 +382,16 @@ class _EndsOn extends ConsumerWidget {
             ),
             const Spacer(),
             Switch(
-              value: habit.endsOn != null,
+              value: endsOn != null,
               onChanged: (value) => vm.setEndsOn(value ? DateTime.now() : null),
             ),
           ],
         ),
-        if (habit.endsOn != null)
+        if (endsOn != null)
           TextField(
             readOnly: true,
             controller: TextEditingController(
-              text: DateFormat('EEEE, MMMM dd, yyyy').format(habit.endsOn!),
+              text: DateFormat('EEEE, MMMM dd, yyyy').format(endsOn),
             ),
             onTap: () async {
               final now = DateTime.now();
@@ -406,7 +420,9 @@ class _EndsOn extends ConsumerWidget {
 class _When extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final when = ref.watch(
+      addHabitViewModelProvider.select((value) => value.when),
+    );
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -425,7 +441,7 @@ class _When extends ConsumerWidget {
         TextField(
           readOnly: true,
           controller: TextEditingController(
-            text: DateFormat('EEEE, MMMM dd, yyyy').format(habit.when),
+            text: DateFormat('EEEE, MMMM dd, yyyy').format(when),
           ),
           onTap: () async {
             final now = DateTime.now();
@@ -474,7 +490,7 @@ class _IconSelectionState extends ConsumerState<_IconSelection> {
 
   @override
   Widget build(BuildContext context) {
-    final habit = ref.watch(addHabitViewModelProvider);
+    final emoji = ref.watch(addHabitViewModelProvider.select((value) => value.emoji));
     final vm = ref.read(addHabitViewModelProvider.notifier);
 
     return Column(
@@ -502,15 +518,16 @@ class _IconSelectionState extends ConsumerState<_IconSelection> {
                 crossAxisCount: 5,
               ),
               itemBuilder: (context, index) {
-                final emoji = AnimatedEmojis.values[index];
+                final e = AnimatedEmojis.values[index];
 
                 return ChoiceChip(
                   label: AnimatedEmoji(
-                    emoji,
+                    e,
                     size: 30,
+                    animate: false,
                   ),
-                  selected: habit.emoji == emoji,
-                  onSelected: (_) => vm.setEmoji(emoji),
+                  selected: emoji == e,
+                  onSelected: (_) => vm.setEmoji(e),
                   showCheckmark: false,
                 );
               },

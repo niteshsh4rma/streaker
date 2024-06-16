@@ -26,7 +26,7 @@ class AddHabitViewModel extends _$AddHabitViewModel {
       name: '',
       emoji: null,
       dailyFrequency: {
-        Day.values.firstWhere((e) => e.index == DateTime.now().weekday)
+        Day.values[DateTime.now().weekday % 7]
       },
       when: DateTime.now(),
     );
