@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  appwrite: ^13.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
