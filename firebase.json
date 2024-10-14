@@ -1,0 +1,21 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "streaker-flutter",
+          "appId": "1:936951452284:android:37f66e972b7b68a209aff9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "streaker-flutter",
+          "configurations": {
+            "android": "1:936951452284:android:37f66e972b7b68a209aff9"
+          }
+        }
+      }
+    }
+  }
+}
