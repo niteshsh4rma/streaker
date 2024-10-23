@@ -18,8 +18,7 @@ Future<void> main() async {
   if (kReleaseMode) {
     SentryFlutter.init(
       (options) {
-        options.dsn =
-            'https://849ae8ff76219711d9f137fc68cd710d@o4505607552696320.ingest.us.sentry.io/4508165820776448';
+        options.dsn = dotenv.get('SENTRY_DSN');
         // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
         // We recommend adjusting this value in production.
         options.tracesSampleRate = 1.0;
