@@ -16,7 +16,7 @@ for PLACEHOLDER in $PLACEHOLDERS; do
   VAR_NAME=$(echo $PLACEHOLDER | tr -d '<>')
 
   # Replace the placeholder with the environment variable value
-  sed -i "s|$PLACEHOLDER|${!VAR_NAME}|g" $ENV_FILE
+  sed -i '' "s|$PLACEHOLDER|${!VAR_NAME}|g" $ENV_FILE
 done
 
 # Setup google-services.json
