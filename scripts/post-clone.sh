@@ -1,21 +1,24 @@
-# Create .env file and add variables
-touch .env 
+#!/bin/bash
 
-echo \
-"
-# Appwrite
-APPWRITE_ENDPOINT=$APPWRITE_ENDPOINT
-APPWRITE_PROJECT=$APPWRITE_PROJECT
+# Define the path for the example and generated .env.json files
+ENV_EXAMPLE_FILE=".env.example.json"
+ENV_FILE=".env.json"
 
-# Firebase
-FIREBASE_API_KEY=$FIREBASE_API_KEY
-FIREBASE_APP_ID=$FIREBASE_APP_ID
-FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID
-FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID
-FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET
-SENTRY_DSN=$SENTRY_DSN
-" >> .env
+# Copy the example file to create the actual .env.json
+cp $ENV_EXAMPLE_FILE $ENV_FILE
+
+# Extract all the placeholders in the format <VARIABLE_NAME> from the template
+PLACEHOLDERS=$(grep -oE "<[A-Z_]+>" $ENV_EXAMPLE_FILE)
+
+# Loop through each placeholder and replace it with the corresponding environment variable
+for PLACEHOLDER in $PLACEHOLDERS; do
+  # Remove the < and > characters to get the variable name
+  VAR_NAME=$(echo $PLACEHOLDER | tr -d '<>')
+
+  # Replace the placeholder with the environment variable value
+  sed -i "s|$PLACEHOLDER|${!VAR_NAME}|g" $ENV_FILE
+done
 
 # Setup google-services.json
 touch android/app/google-services.json
-echo $GOOGLE_SERVICES_FILE >> android/app/google-services.json
+echo $GOOGLE_SERVICES_FILE > android/app/google-services.json

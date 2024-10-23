@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:streaker/presentation/splash/splash_provider.dart';
@@ -22,9 +21,6 @@ class SplashPage extends ConsumerWidget {
               HugeIcons.strokeRoundedAtomicPower,
               size: 128,
             ),
-          ),
-          Center(
-            child: Text(dotenv.env.toString()),
           ),
           Center(
             child: Container(
