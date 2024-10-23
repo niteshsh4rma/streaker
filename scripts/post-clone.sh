@@ -18,3 +18,5 @@ echo \
     \"FIREBASE_PROJECT_ID\":\"$FIREBASE_PROJECT_ID\",
     \"FIREBASE_STORAGE_BUCKET\":\"$FIREBASE_STORAGE_BUCKET\"
 }" >> .env.json
+
+cat .env.json
